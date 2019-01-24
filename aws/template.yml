@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lambda Functions to compare the cold start performance between Spring and Micronaut
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 100
+
+Resources:
+  SpringCloudFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../spring-function/target/spring-function-0.0.1-SNAPSHOT-aws.jar
+      Handler: io.viesure.blog.springfunction.FunctionHandler
+      Runtime: java8
+      MemorySize: 1024
+      Tags:
+        viesure-blog: spring-micronaut-functions
+  
+  MicronautFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../micronaut-function/build/libs/micronaut-function-0.1-all.jar
+      Handler: io.micronaut.function.aws.MicronautRequestStreamHandler
+      Runtime: java8
+      MemorySize: 1024
+      Tags:
+        viesure-blog: spring-micronaut-functions
