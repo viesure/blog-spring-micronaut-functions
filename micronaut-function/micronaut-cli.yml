@@ -1,0 +1,5 @@
+profile: function-aws
+defaultPackage: micronaut.function
+---
+testFramework: junit
+sourceLanguage: java
